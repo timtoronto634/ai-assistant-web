@@ -14,7 +14,7 @@ const TopView: React.FC = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data: prompt }),
+      body: JSON.stringify({ prompt: prompt }),
     });
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
@@ -22,7 +22,7 @@ const TopView: React.FC = () => {
     return response.json();
   };
 
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   const query = useMutation({mutationFn: sendPrompt,})
 
