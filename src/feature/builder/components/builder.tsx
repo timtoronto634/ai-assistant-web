@@ -1,6 +1,7 @@
 // TopView.tsx
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import TextField from '@material-ui/core/TextField/';
 import {
   useMutation,
   useQueryClient,
@@ -22,17 +23,18 @@ const TopView: React.FC = () => {
     return response.json();
   };
 
-  // const queryClient = useQueryClient()
-
   const query = useMutation({mutationFn: sendPrompt,})
 
   return (
     <div>
       <div>Your Current Building Block</div>
-      <input
-        type="text" 
-        value={inputValue} 
-        onChange={(e) => setInputValue(e.target.value)} 
+      <TextField
+        label="Input"
+        variant="outlined"
+        fullWidth
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        style={{ marginBottom: '20px' }}
       />
       <Button
         onClick={() => {query.mutate(inputValue)}}
