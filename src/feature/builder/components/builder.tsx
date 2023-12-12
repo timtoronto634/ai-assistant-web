@@ -6,8 +6,10 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query'
+import { Card } from '@mui/material';
 const TopView: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
+  const [responseValue, setResponseValue] = useState('');
 
   const sendPrompt = async (prompt: string) => {
     const response = await fetch('http://localhost:8039/chat', {
@@ -20,7 +22,8 @@ const TopView: React.FC = () => {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }
-    return response.json();
+    const res = await response.json();
+    setResponseValue(res.result)
   };
 
   const query = useMutation({mutationFn: sendPrompt,})
@@ -41,6 +44,7 @@ const TopView: React.FC = () => {
       >
         send
       </Button>
+      <Card>{responseValue}</Card>
     </div>
   );
 };
