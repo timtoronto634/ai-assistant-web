@@ -1,32 +1,43 @@
 // TopView.tsx
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@material-ui/core/TextField/';
-import {
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query'
+import TextField from '@mui/material/TextField';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Card } from '@mui/material';
-const TopView: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
+
+interface TopViewProps {
+  content: string;
+  setContent: any;
+}
+
+const sendPrompt = async (prompt: string): Promise<string> => {
+  const response = await fetch('http://localhost:8039/chat', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ prompt: prompt }),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text();
+      throw new Error(`Network response was not ok. Status: ${response.status}. Error: ${errorBody}`);
+
+  }
+  const res = await response.json();
+  return res.result;
+};
+
+
+const TopView: React.FC<TopViewProps> = ({ content, setContent }) => {
   const [responseValue, setResponseValue] = useState('');
-
-  const sendPrompt = async (prompt: string) => {
-    const response = await fetch('http://localhost:8039/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt: prompt }),
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const res = await response.json();
-    setResponseValue(res.result)
-  };
-
-  const query = useMutation({mutationFn: sendPrompt,})
+  const queryClient = useQueryClient();
+  const mutation = useMutation({mutationFn: sendPrompt, onSuccess(data){
+    setResponseValue(data)
+  },
+  onError: (error) => {
+    console.error('Error:', error);
+  },
+})
 
   return (
     <div>
@@ -35,12 +46,12 @@ const TopView: React.FC = () => {
         label="Input"
         variant="outlined"
         fullWidth
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         style={{ marginBottom: '20px' }}
       />
       <Button
-        onClick={() => {query.mutate(inputValue)}}
+        onClick={() => mutation.mutate(content)}
       >
         send
       </Button>
@@ -49,4 +60,4 @@ const TopView: React.FC = () => {
   );
 };
 
-export default TopView;
+export default TopView
