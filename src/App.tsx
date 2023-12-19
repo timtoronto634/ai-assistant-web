@@ -1,7 +1,7 @@
 import './App.css'
 import { useState } from 'react'
 import TopView from './feature/builder/components/builder'
-import { TemplateInput } from './feature/templates/components/template_input'
+import { TemplateBox } from './feature/templates/components/template_input'
 import {
   QueryClient,
   QueryClientProvider,
@@ -16,7 +16,7 @@ function App() {
       <>
         <h1>Vite + React</h1>
         <TopView content={content} setContent={setContent} />
-        <TemplateInput />
+        <TemplateBox setContent={setContent} />
       </>
     </QueryClientProvider>
   )

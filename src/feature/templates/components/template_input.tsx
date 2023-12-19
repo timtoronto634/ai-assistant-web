@@ -1,16 +1,29 @@
-import { useState } from 'react';
-import TextField from '@material-ui/core/TextField/';
-import { TemplateBox } from './template_box';
 
-export const TemplateInput = () => {
-  const handleTemplateClick = (template: string) => {
-    console.log(template)
+interface TemplateBoxProps {
+  setContent: (content: string) => void;
+}
+
+export const TemplateBox: React.FC<TemplateBoxProps> = ({ setContent }) => {
+  const templates = [
+    "Hello World",
+    "Sample Text",
+    "Another Example",
+    // Add more templates as needed
+  ];
+
+  const handleTemplateSelect = (template: string) => {
+    setContent(template);
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: 'auto' }}>
-      <TemplateBox template="Template 1" onTemplateClick={handleTemplateClick} />
-      <TemplateBox template="Template 2" onTemplateClick={handleTemplateClick} />
+    <div>
+      <h3>Select a Template</h3>
+      {templates.map((template, index) => (
+        <button key={index} onClick={() => handleTemplateSelect(template)}>
+          {template}
+        </button>
+      ))}
     </div>
   );
-}
+};
+
