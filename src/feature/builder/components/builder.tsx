@@ -48,7 +48,7 @@ const TopView: React.FC<TopViewProps> = ({ content, setContent }) => {
         fullWidth
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        style={{ marginBottom: '20px' }}
+        style={{ marginBottom: '20px', backgroundColor: 'white' }}
       />
       <Button
         onClick={() => mutation.mutate(content)}
