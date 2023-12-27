@@ -1,14 +1,12 @@
 import './App.css'
 import { useState } from 'react'
-import TopView from './feature/builder/components/builder'
-import { TemplateBox } from './feature/templates/components/template_input'
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import MessageDisplay from './feature/chat/MessageDisplay'
 import ChatInput from './feature/chat/ChatInput'
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import type {Message} from './feature/chat/Message'
 
@@ -40,7 +38,6 @@ function Chat() {
     const res = await response.json();
     return res.result;
   };
-  const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: sendPrompt, 
     onSuccess(data){
@@ -64,7 +61,7 @@ function Chat() {
     <div style={{ width: '100%' }}>
       <MessageDisplay messages={messages} />
       <ChatInput onSendMessage={handleSendMessage} />
-  </div>
+    </div>
   )
 }
 
