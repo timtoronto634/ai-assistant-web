@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "wix.vscode-import-cost",
+    "streetsidesoftware.code-spell-checker",
+    "formulahendry.auto-complete-tag",
+    "EditorConfig.EditorConfig",
+    "ionutvmi.path-autocomplete"
+  ],
+  "unwantedRecommendations": []
+}
