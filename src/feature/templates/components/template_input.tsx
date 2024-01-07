@@ -8,7 +8,7 @@ export const TemplateBox: React.FC<TemplateBoxProps> = ({ setContent }) => {
     "Hello World",
     "Sample Text",
     "Another Example",
-    "tanstack の version は 5.4.3 なので、適切な document は検索して"
+    // "tanstack の version は 5.4.3 なので、適切な document は検索して"
     // Add more templates as needed
   ];
 
