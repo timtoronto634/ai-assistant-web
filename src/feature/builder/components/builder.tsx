@@ -3,7 +3,7 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Card } from '@mui/material';
+import { Card, CircularProgress } from '@mui/material';
 
 interface TopViewProps {
   content: string;
@@ -30,14 +30,16 @@ const sendPrompt = async (prompt: string): Promise<string> => {
 
 const TopView: React.FC<TopViewProps> = ({ content, setContent }) => {
   const [responseValue, setResponseValue] = useState('');
-  const queryClient = useQueryClient();
-  const mutation = useMutation({mutationFn: sendPrompt, onSuccess(data){
-    setResponseValue(data)
-  },
-  onError: (error) => {
-    console.error('Error:', error);
-  },
-})
+  const {mutate, isPending} = useMutation({
+    mutationFn: sendPrompt,
+    onSuccess(data) {
+      setResponseValue(data);
+    },
+    onError: (error) => {
+      setResponseValue("fail: "+ error)
+      console.error('Error:', error);
+    },
+  });
 
   return (
     <div>
@@ -51,11 +53,15 @@ const TopView: React.FC<TopViewProps> = ({ content, setContent }) => {
         style={{ marginBottom: '20px', backgroundColor: 'white' }}
       />
       <Button
-        onClick={() => mutation.mutate(content)}
+        onClick={() => mutate(content)}
       >
         send
       </Button>
-      <Card>{responseValue}</Card>
+      {isPending ? (
+        <CircularProgress />
+      ) : (
+        <Card>{responseValue}</Card>
+      )}
     </div>
   );
 };
