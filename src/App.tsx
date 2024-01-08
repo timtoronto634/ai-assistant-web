@@ -19,28 +19,6 @@ const App = () => (
 
 export default App;
 
-// import './App.css'
-// import { useState } from 'react'
-// import {
-//   QueryClient,
-//   QueryClientProvider,
-// } from '@tanstack/react-query'
-// import MessageDisplay from './features/chat/MessageDisplay'
-// import ChatInput from './features/chat/ChatInput'
-// import { useMutation } from '@tanstack/react-query';
-
-// import type {ChatMessage} from '@/types/ChatMessage'
-// import { Divider } from '@mui/material'
-// import PromptBuildingBlock from './features/builder/buildingBlock'
-// import TemplateAdder from './features/templates/components/templateBox'
-// import { TemplateText } from './SavedText'
-// import SavedTextList from './features/templates/components/savedTextList'
-// import TopView from './features/builder/components/builder'
-
-// const queryClient = new QueryClient()
-
-// function App() {
-
 //   const [content, setContent] = useState('')
 
 //   const [savedTexts, setSavedTexts] = useState<TemplateText[]>([]);

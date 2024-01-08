@@ -1,3 +1,4 @@
+// src/features/chat/components/ChatInput.tsx
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 
@@ -21,7 +22,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSend }) => {
         onChange={(e) => setMessage(e.target.value)}
         fullWidth
       />
-      <Button onClick={handleSubmit}>Send</Button>
+      <Button variant="contained" onClick={handleSubmit}>
+        Send
+      </Button>
     </div>
   );
 };
