@@ -1,3 +1,4 @@
+// src/features/chat/hooks/useChat.ts
 import { useState } from 'react';
 import { ChatMessage } from '../../../types/ChatMessage';
 import { useSendMessage } from '../api/chatApi';
@@ -15,15 +16,25 @@ export const useChat = (sessionId: string) => {
 
   const send = (messageText: string) => {
     const newMessage: ChatMessage = {
-      id: `msg-${Date.now()}`,
+      id: `prompt-${Date.now()}`,
       sessionId,
       sender: 'User', // 仮のユーザー名
       message: messageText,
       timestamp: new Date(),
     };
+    setMessages((prev) => [...prev, newMessage]);
+
     sendMessageMutation.mutate(messageText, {
-      onSuccess: () => {
-        setMessages((prev) => [...prev, newMessage]);
+      onSuccess: (data) => {
+        console.log('Success:', data);
+        const aiAnswer: ChatMessage = {
+          id: `ans-${Date.now()}`,
+          sessionId,
+          sender: 'AI',
+          message: data.result,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, aiAnswer]);
       },
     });
   };

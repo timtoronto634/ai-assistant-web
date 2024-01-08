@@ -7,10 +7,13 @@ export const sendMessage = async (message: string): Promise<any> => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ prompt: message}),
+    body: JSON.stringify({ prompt: message }),
   });
   return response.json();
 };
+
+export const useSendMessage = () =>
+  useMutation({ mutationFn: (message: string) => sendMessage(message) });
 
 // // メッセージを取得するAPI
 // export const fetchMessages = async (sessionId: string): Promise<ChatMessage[]> => {
@@ -19,7 +22,6 @@ export const sendMessage = async (message: string): Promise<any> => {
 // };
 
 // Tanstack Query Hooks
-export const useSendMessage = () => useMutation({mutationFn: (message: string) => sendMessage(message)})
 // export const useFetchMessages = (sessionId: string) => useQuery<ChatMessage[], Error, ChatMessage[]>({
 //   queryKey: ['messages', sessionId],
 //   queryFn: () => fetchMessages(sessionId)
