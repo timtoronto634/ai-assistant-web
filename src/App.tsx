@@ -14,6 +14,8 @@ import PromptBuildingBlock from './feature/builder/buildingBlock'
 import TemplateAdder from './feature/templates/components/templateBox'
 import { TemplateText } from './SavedText'
 import SavedTextList from './feature/templates/components/savedTextList'
+import TopView from './feature/builder/components/builder'
+import TemplateBox from './feature/templates/components/templateBox'
 
 const queryClient = new QueryClient()
 
@@ -43,11 +45,11 @@ function App() {
       <div>
         <h1>Vite + React</h1>
         <TopView content={content} setContent={setContent} />
-        <TemplateBox setContent={setContent} />
+        {/* <TemplateBox setContent={setContent} /> */}
       </div>
       <Divider />
       <div>
-        <PromptBuildingBlock onDrop={handleDrop} onDragOver={handleDragOver} >
+        <PromptBuildingBlock onDrop={handleDrop} onDragOver={handleDragOver} children={undefined} >
 
         </PromptBuildingBlock>
         <TemplateAdder onSave={handleSave} />
