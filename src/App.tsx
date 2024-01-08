@@ -4,18 +4,18 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import MessageDisplay from './feature/chat/MessageDisplay'
-import ChatInput from './feature/chat/ChatInput'
+import MessageDisplay from './features/chat/MessageDisplay'
+import ChatInput from './features/chat/ChatInput'
 import { useMutation } from '@tanstack/react-query';
 
-import type {Message} from './feature/chat/Message'
+import type {ChatMessage} from './features/types/ChatMessage'
 import { Divider } from '@mui/material'
-import PromptBuildingBlock from './feature/builder/buildingBlock'
-import TemplateAdder from './feature/templates/components/templateBox'
+import PromptBuildingBlock from './features/builder/buildingBlock'
+import TemplateAdder from './features/templates/components/templateBox'
 import { TemplateText } from './SavedText'
-import SavedTextList from './feature/templates/components/savedTextList'
-import TopView from './feature/builder/components/builder'
-import TemplateBox from './feature/templates/components/templateBox'
+import SavedTextList from './features/templates/components/savedTextList'
+import TopView from './features/builder/components/builder'
+import TemplateBox from './features/templates/components/templateBox'
 
 const queryClient = new QueryClient()
 
@@ -90,7 +90,7 @@ function Chat() {
     },
   })
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
 
   const handleSendMessage = (messageText: string) => {
     const message = { text: messageText, author: 'me' };
