@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "preview": "vite preview",
-    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
-    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,scss,md}'"
+    "lint": "eslint --ext .ts,.tsx ./src --no-error-on-unmatched-pattern --ignore-path .gitignore --ignore-path .eslintignore --cache --cache-location node_modules/.cache/eslint/ --cache-strategy content",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier \"**/*.+(html|css|json|ts|tsx)\" --ignore-path .gitignore --ignore-path .prettierignore --cache --cache-strategy content --check",
+    "format:fix": "pnpm format --write",
+    "types:check": "tsc --noEmit --pretty",
+    "validate": "pnpm exec editorconfig ./ && pnpm lint && pnpm format && pnpm types:check",
+    "validate:fix": "pnpm exec editorconfig ./ && pnpm lint:fix && pnpm format:fix && pnpm types:check",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -37,5 +41,9 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "engines": {
+    "node": "18.16.0",
+    "pnpm": "8.10.5"
   }
 }

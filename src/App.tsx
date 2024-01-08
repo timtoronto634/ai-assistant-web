@@ -9,14 +9,53 @@ import ChatInput from './feature/chat/ChatInput'
 import { useMutation } from '@tanstack/react-query';
 
 import type {Message} from './feature/chat/Message'
+import { Divider } from '@mui/material'
+import PromptBuildingBlock from './feature/builder/buildingBlock'
+import TemplateAdder from './feature/templates/components/templateBox'
+import { TemplateText } from './SavedText'
+import SavedTextList from './feature/templates/components/savedTextList'
 
 const queryClient = new QueryClient()
 
 function App() {
 
+  const [content, setContent] = useState('')
+
+  const [savedTexts, setSavedTexts] = useState<TemplateText[]>([]);
+  const [promptText, setPromptText] = useState('');
+
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    const text = e.dataTransfer.getData('text/plain');
+    setPromptText(promptText + text);
+  };
+
+  const handleDragOver = (e: any) => {  }
+
+  const handleSave = (text: TemplateText) => {
+    // Add the new text to the array of saved texts
+    setSavedTexts(prevTexts => [...prevTexts, text]);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <Chat />
+      <div>
+        <h1>Vite + React</h1>
+        <TopView content={content} setContent={setContent} />
+        <TemplateBox setContent={setContent} />
+      </div>
+      <Divider />
+      <div>
+        <PromptBuildingBlock onDrop={handleDrop} onDragOver={handleDragOver} >
+
+        </PromptBuildingBlock>
+        <TemplateAdder onSave={handleSave} />
+        <div>
+        <h2>Saved Texts</h2>
+        <SavedTextList savedTexts={savedTexts} />
+        </div>
+      </div>
     </QueryClientProvider>
   )
 }
@@ -39,7 +78,7 @@ function Chat() {
     return res.result;
   };
   const mutation = useMutation({
-    mutationFn: sendPrompt, 
+    mutationFn: sendPrompt,
     onSuccess(data){
       const message = { text: data, author: 'bot' };
       setMessages([...messages, message]);
