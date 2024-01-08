@@ -1,32 +1,19 @@
 import React from 'react';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-import { BrowserRouter as Router, Routes, Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import {ChatPage} from './features/chat/components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ChatRoutes } from './features/chat';
 
-  const queryClient = new QueryClient()
-  const routes = {
-  Element: (
-    <QueryClientProvider client={queryClient}>
-    </QueryClientProvider>
+const queryClient = new QueryClient();
+const routes = {
+  Element: <QueryClientProvider client={queryClient}></QueryClientProvider>,
+  children: [{ path: '/chat', element: <ChatRoutes /> }],
+};
 
-  ),
-  children: [
-    { path: '/chat', element: <ChatRoutes /> },
-  ]
-}
+const router = createBrowserRouter([routes]);
 
-
-const router = createBrowserRouter([routes])
-
-const App = () => <RouterProvider router={router} />
+const App = () => <RouterProvider router={router} />;
 
 export default App;
-
-
 
 // import './App.css'
 // import { useState } from 'react'

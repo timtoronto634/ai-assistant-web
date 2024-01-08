@@ -8,10 +8,13 @@ type ChatPageProps = {
   sessionId: string;
   messages: ChatMessage[];
   onSend: (message: string) => void;
-}
+};
 
-export const ChatPage: React.FC<ChatPageProps> = ({sessionId, messages, onSend }) => {
-
+export const ChatPage: React.FC<ChatPageProps> = ({
+  sessionId,
+  messages,
+  onSend,
+}) => {
   return (
     <Container maxWidth="sm">
       <Paper style={{ padding: '20px', marginTop: '20px' }}>

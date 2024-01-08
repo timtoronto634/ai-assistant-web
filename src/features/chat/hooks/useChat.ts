@@ -17,7 +17,7 @@ export const useChat = (sessionId: string) => {
     const newMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
       sessionId,
-      sender: 'User',  // 仮のユーザー名
+      sender: 'User', // 仮のユーザー名
       message: messageText,
       timestamp: new Date(),
     };
