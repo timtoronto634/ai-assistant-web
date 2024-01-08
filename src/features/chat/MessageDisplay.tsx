@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, ListItemText, Box } from '@mui/material';
-import type { ChatMessage } from '../types/ChatMessage';
+import type { ChatMessage } from '@/types/ChatMessage';
 
 type MessageDisplayProps = {
   messages: ChatMessage[];

@@ -8,14 +8,13 @@ import MessageDisplay from './features/chat/MessageDisplay'
 import ChatInput from './features/chat/ChatInput'
 import { useMutation } from '@tanstack/react-query';
 
-import type {ChatMessage} from './features/types/ChatMessage'
+import type {ChatMessage} from '@/types/ChatMessage'
 import { Divider } from '@mui/material'
 import PromptBuildingBlock from './features/builder/buildingBlock'
 import TemplateAdder from './features/templates/components/templateBox'
 import { TemplateText } from './SavedText'
 import SavedTextList from './features/templates/components/savedTextList'
 import TopView from './features/builder/components/builder'
-import TemplateBox from './features/templates/components/templateBox'
 
 const queryClient = new QueryClient()
 
