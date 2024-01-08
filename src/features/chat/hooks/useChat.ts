@@ -5,7 +5,7 @@ import { useSendMessage } from '../api/chatApi';
 
 export const useChat = (sessionId: string) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const sendMessageMutation = useSendMessage();
+  const { mutate, isPending } = useSendMessage();
   // const { data } = useFetchMessages(sessionId);
 
   // useEffect(() => {
@@ -24,7 +24,7 @@ export const useChat = (sessionId: string) => {
     };
     setMessages((prev) => [...prev, newMessage]);
 
-    sendMessageMutation.mutate(messageText, {
+    mutate(messageText, {
       onSuccess: (data) => {
         console.log('Success:', data);
         const aiAnswer: ChatMessage = {
@@ -39,5 +39,5 @@ export const useChat = (sessionId: string) => {
     });
   };
 
-  return { messages, send };
+  return { messages, send, isPending };
 };
