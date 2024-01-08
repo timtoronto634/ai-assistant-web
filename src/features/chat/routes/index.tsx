@@ -3,6 +3,6 @@ import { Chat } from './chat-page';
 
 export const ChatRoutes = () => (
   <Routes>
-    <Route path="/chat/:sessionId" element={<Chat />} />
+    <Route path=":sessionId" element={<Chat />} />
   </Routes>
 );
