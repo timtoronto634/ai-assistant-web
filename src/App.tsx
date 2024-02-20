@@ -1,12 +1,19 @@
-import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  Navigate,
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 import { ChatRoutes } from './features/chat';
 
 const queryClient = new QueryClient();
 const routes = {
   Element: <Outlet />,
-  children: [{ path: '/chat/*', element: <ChatRoutes /> }],
+  children: [
+    { path: '/chat/*', element: <ChatRoutes /> },
+    { path: '*', element: <Navigate to="/chat/new" replace /> },
+  ],
 };
 
 const router = createBrowserRouter([routes]);
